@@ -1,0 +1,35 @@
+{
+  "model": {
+    "name": "gpt-4o-mini",
+    "provider": "openai",
+    "api_key": "OPENAI_API_KEY"
+  },
+  "mcp_servers": [
+    {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "examples/py/date_mcp_server.py"],
+      "timeout": 120
+    },
+    {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "examples/py/pvc_company.py"],
+      "timeout": 120
+    }
+  ],
+  "chat": {
+    "max_turns": 30,
+    "agent_name": "Assistant",
+    "agent_instructions": "You are a helpful assistant with shortly answering questions."
+  },
+  "ui": {
+    "title": "MCP Agent Chat",
+    "height": 500,
+    "placeholder": "Chat with our AI Assistant:",
+    "launch_browser": true,
+    "share": false,
+    "server_name": "127.0.0.1",
+    "server_port": 7860
+  }
+}
