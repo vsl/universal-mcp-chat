@@ -1,7 +1,7 @@
 from typing import List, Dict, Any
 from agents import Agent, OpenAIChatCompletionsModel, AsyncOpenAI
 from agents.mcp import MCPServerStdio, MCPServerStreamableHttp
-from config_manager import Config
+from .config_manager import Config
 
 
 class MCPServerManager:

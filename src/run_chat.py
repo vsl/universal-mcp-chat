@@ -6,7 +6,7 @@ CLI script to run MCP Agent Chat with different configurations.
 import argparse
 import sys
 from pathlib import Path
-from mcp_chat import MCPChatInterface
+from .mcp_chat import MCPChatInterface
 
 
 def main():

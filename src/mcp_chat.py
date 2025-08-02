@@ -1,10 +1,9 @@
-import asyncio
-from typing import List, Dict, Any
+from typing import List, Dict
 import gradio as gr
 from agents import Runner, trace
 
-from config_manager import Config
-from managers import MCPServerManager, ModelManager, AgentManager
+from .config_manager import Config
+from .managers import MCPServerManager, ModelManager, AgentManager
 
 
 class MCPChatInterface:
