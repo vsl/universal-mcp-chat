@@ -461,5 +461,3 @@ from src.mcp_chat import MCPChatInterface
 interface = MCPChatInterface("configs/config.json")
 interface.launch()
 ```
-interface.launch()
-```
