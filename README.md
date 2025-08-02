@@ -4,7 +4,7 @@ A configurable web-based chat interface designed for developers to test and inte
 
 ## Quick Start
 
-1. **Update configuration**: Edit `config.json` to match your AI model setup (OpenAI, Ollama, LM Studio, etc.)
+1. **Update configuration**: Edit `configs/config.json` to match your AI model setup (OpenAI, Ollama, LM Studio, etc.)
 
 2. **Start MCP servers** (if using external servers):
    ```bash
@@ -14,8 +14,9 @@ A configurable web-based chat interface designed for developers to test and inte
 
 3. **Run the application**:
    ```bash
-   uv run run_chat.py
+   uv run run.py
    ```
+   > **Important**: Always use `uv run` or ensure your virtual environment is activated with `source .venv/bin/activate`
 
 4. **Access the web interface** at `http://localhost:7860`
 
@@ -36,14 +37,16 @@ A configurable web-based chat interface designed for developers to test and inte
 
 ```
 .
-├── config.json           # Main configuration file
-├── config_openai.json    # OpenAI configuration example
-├── config_lmstudio.json  # LM Studio configuration example
-├── config_manager.py     # Configuration management
-├── managers.py          # MCP, Model, and Agent managers
-├── mcp_chat.py          # Main chat interface application
-├── run_chat.py          # CLI launcher with config selection
-├── test_mcp_agent.ipynb # Original notebook
+├── configs/
+│   ├── config.json           # Main configuration file (LM Studio)
+│   ├── config_openai.json    # OpenAI configuration example
+│   └── config_lmstudio.json  # LM Studio configuration example
+├── src/
+│   ├── config_manager.py     # Configuration management
+│   ├── managers.py          # MCP, Model, and Agent managers
+│   ├── mcp_chat.py          # Main chat interface application
+│   ├── run_chat.py          # CLI launcher with config selection
+│   └── test_mcp_agent.ipynb # Original notebook
 ├── examples/
 │   ├── js/
 │   │   ├── books_server.js       # Books MCP server (HTTP)
@@ -52,8 +55,10 @@ A configurable web-based chat interface designed for developers to test and inte
 │   └── py/
 │       ├── date_mcp_server.py    # Date/time MCP server
 │       └── pvc_company.py        # Company info MCP server
-├── pyproject.toml       # Project dependencies
-└── README.md           # This file
+├── images/                   # UI screenshots and assets
+├── run.py                    # Convenience launcher script
+├── pyproject.toml           # Project dependencies
+└── README.md               # This file
 ```
 
 ## Installation
@@ -74,7 +79,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
    uv venv
    source .venv/bin/activate
    ```
-   > **Notes:** `deactivate`
+   > **Note:** Use `deactivate` to exit the virtual environment when done.
 
 3. **Install dependencies** using uv:
    ```bash
@@ -86,11 +91,25 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
    echo "OPENAI_API_KEY=your_openai_api_key_here" > .env
    ```
 
+> **Important**: Always use `uv run` commands or activate the virtual environment with `source .venv/bin/activate` before running Python scripts. The `uv run` approach is recommended as it automatically handles the environment.
+
+### Verify Installation
+
+Test that everything is set up correctly:
+
+```bash
+# List available configurations
+uv run run.py --list-configs
+
+# Check if the application can start (Ctrl+C to stop)
+uv run run.py --help
+```
+
 > **Command Usage**: This documentation uses `uv run` for executing Python scripts, which is the recommended approach when using uv for dependency management. You can substitute `python` for `uv run` in any command if you prefer or are using a different Python environment setup.
 
 ## Configuration
 
-The application is configured via `config.json`. Here are examples for different setups:
+The application is configured via `configs/config.json`. Here are examples for different setups:
 
 ### Ollama Configuration (Default)
 
@@ -222,33 +241,33 @@ The application is configured via `config.json`. Here are examples for different
 
 2. **Run the chat interface**:
 
-   **Option A: Using the CLI launcher (recommended)**
+   **Option A: Using the convenience launcher (recommended)**
    ```bash
-   uv run run_chat.py
+   uv run run.py
    ```
    
    **Option B: With a specific configuration**
    ```bash
-   uv run run_chat.py --config config_openai.json
+   uv run run.py --config configs/config_openai.json
    ```
    
    **Option C: List available configurations**
    ```bash
-   uv run run_chat.py --list-configs
+   uv run run.py --list-configs
    ```
    
-   **Option D: Direct execution**
+   **Option D: Direct execution from src directory**
    ```bash
-   uv run mcp_chat.py
+   uv run src/mcp_chat.py
    ```
 
    > **Note**: You can also use `python` instead of `uv run` if you prefer or if you're working with a different Python environment setup.
 
 3. **Access the web interface** at `http://localhost:7860`
 
-### CLI Launcher (`run_chat.py`)
+### CLI Launcher (`run.py`)
 
-The `run_chat.py` script provides a convenient command-line interface for starting the MCP Agent Chat with different configurations:
+The `run.py` script provides a convenient command-line interface for starting the MCP Agent Chat with different configurations:
 
 **Features:**
 - **Configuration Selection**: Choose different config files
@@ -259,31 +278,29 @@ The `run_chat.py` script provides a convenient command-line interface for starti
 **Usage Examples:**
 
 ```bash
-# Run with default config.json
-uv run run_chat.py
+# Run with default configs/config.json
+uv run run.py
 
 # Run with OpenAI configuration
-uv run run_chat.py --config config_openai.json
+uv run run.py --config configs/config_openai.json
 
 # Run with LM Studio configuration  
-uv run run_chat.py --config config_lmstudio.json
+uv run run.py --config configs/config_lmstudio.json
 
 # List all available configurations
-uv run run_chat.py --list-configs
+uv run run.py --list-configs
 
 # Get help
-uv run run_chat.py --help
+uv run run.py --help
 ```
 
 > **Note**: You can also use `python` instead of `uv run` for any of these commands.
 
-**Why use `run_chat.py` instead of `mcp_chat.py` directly?**
+**Why use `run.py` instead of `src/mcp_chat.py` directly?**
 - **Easier configuration switching** between different AI providers
 - **Built-in validation** to catch configuration errors early
 - **Better error messages** when something goes wrong
 - **Status information** showing what model and servers are being used
-
-> **Note**: All commands in this documentation use `uv run` but can be replaced with `python` if preferred.
 
 ### Testing MCP Servers
 
@@ -321,12 +338,12 @@ PORT=3011 node examples/js/books_server.js
 ### Adding New MCP Servers
 
 1. Create your MCP server following the MCP specification
-2. Add it to the `mcp_servers` array in `config.json`
+2. Add it to the `mcp_servers` array in `configs/config.json`
 3. Restart the application
 
 ### Customizing the Interface
 
-Modify `mcp_chat.py` to customize:
+Modify `src/mcp_chat.py` to customize:
 - UI layout and styling
 - Chat behavior
 - Additional features
@@ -341,7 +358,7 @@ OPENAI_API_KEY=your_openai_api_key
 ANTHROPIC_API_KEY=your_anthropic_api_key
 ```
 
-Then reference them in config.json with uppercase names:
+Then reference them in configs/config.json with uppercase names:
 ```json
 {
   "model": {
@@ -398,13 +415,13 @@ Then configure:
 
 ```bash
 # Basic usage
-uv run run_chat.py
+uv run run.py
 
 # With specific config
-uv run run_chat.py --config my_config.json
+uv run run.py --config configs/my_config.json
 
 # List available configs
-uv run run_chat.py --list-configs
+uv run run.py --list-configs
 ```
 
 > **Note**: You can also use `python` instead of `uv run` for any of these commands.
@@ -412,9 +429,9 @@ uv run run_chat.py --list-configs
 ### Config Manager
 
 ```python
-from config_manager import Config
+from src.config_manager import Config
 
-config = Config("config.json")
+config = Config("configs/config.json")
 print(config.model_name)
 print(config.api_key)
 ```
@@ -422,7 +439,7 @@ print(config.api_key)
 ### Managers
 
 ```python
-from managers import MCPServerManager, ModelManager, AgentManager
+from src.managers import MCPServerManager, ModelManager, AgentManager
 
 # Initialize managers
 mcp_manager = MCPServerManager(config)
@@ -439,8 +456,10 @@ agent = await agent_manager.create_agent()
 ### Chat Interface
 
 ```python
-from mcp_chat import MCPChatInterface
+from src.mcp_chat import MCPChatInterface
 
-interface = MCPChatInterface("config.json")
+interface = MCPChatInterface("configs/config.json")
+interface.launch()
+```
 interface.launch()
 ```

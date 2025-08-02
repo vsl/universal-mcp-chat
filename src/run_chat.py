@@ -14,8 +14,8 @@ def main():
     parser.add_argument(
         "--config", 
         "-c", 
-        default="config.json",
-        help="Path to configuration file (default: config.json)"
+        default="configs/config.json",
+        help="Path to configuration file (default: configs/config.json)"
     )
     parser.add_argument(
         "--list-configs",
@@ -27,9 +27,9 @@ def main():
     
     if args.list_configs:
         print("Available example configurations:")
-        print("  config.json (default) - Ollama configuration")
-        print("  config_openai.json - OpenAI configuration")
-        print("  config_lmstudio.json - LM Studio configuration")
+        print("  configs/config.json (default) - Ollama configuration")
+        print("  configs/config_openai.json - OpenAI configuration")
+        print("  configs/config_lmstudio.json - LM Studio configuration")
         return
     
     config_path = args.config
@@ -38,9 +38,9 @@ def main():
     if not Path(config_path).exists():
         print(f"Error: Configuration file '{config_path}' not found.")
         print("Available configurations:")
-        print("  config.json (default)")
-        print("  config_openai.json")
-        print("  config_lmstudio.json")
+        print("  configs/config.json (default)")
+        print("  configs/config_openai.json")
+        print("  configs/config_lmstudio.json")
         print("\nUse --list-configs to see details.")
         sys.exit(1)
     

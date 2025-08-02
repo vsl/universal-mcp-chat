@@ -10,7 +10,7 @@ from managers import MCPServerManager, ModelManager, AgentManager
 class MCPChatInterface:
     """Chat interface for MCP Agent."""
     
-    def __init__(self, config_path: str = "config.json"):
+    def __init__(self, config_path: str = "configs/config.json"):
         """Initialize the chat interface.
         
         Args:
