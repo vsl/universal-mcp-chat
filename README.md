@@ -29,6 +29,9 @@ A configurable web-based chat interface designed for developers to test and inte
 - **Environment Variables**: Secure API key management
 - **Extensible Configuration**: JSON-based configuration system
 
+![MCP Agent Chat UI](images/ui-screenshot.png)
+*Web interface for chatting with MCP-enabled AI agents*
+
 ## Project Structure
 
 ```
@@ -288,7 +291,7 @@ The application includes example MCP servers for testing:
 
 1. **Date/Time Server** (`examples/py/date_mcp_server.py`):
    - Try: "What time is it now?" 
-   - Try: "What time is it here?" (requires name "Alex"). Here we test how the MCP server interacts with the user.
+   - Try: "What time is it for me?" (requires name "Alex"). Here we test how the MCP server interacts with the user.
 
 2. **Company Info Server** (`examples/py/pvc_company.py`):
    - Try: "What is the website of the VSL PVC company?"

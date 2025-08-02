@@ -31,7 +31,7 @@
   },
   "ui": {
     "title": "MCP Agent Chat",
-    "height": 500,
+    "height": 600,
     "placeholder": "Chat with our AI Assistant:",
     "launch_browser": true,
     "server_name": "127.0.0.1",
